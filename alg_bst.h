@@ -32,6 +32,11 @@ node_bst* min_node_bst(node_bst *node);
 
 node_bst *delete_bst(node_bst *root, char* data);
 
+/*
+ * Returns minimum data in this tree
+ */
+char* min_bst(node_bst *root);
+
 typedef struct funs_bst funs_bst;
 
 

@@ -104,6 +104,10 @@ node_bst *delete_bst(node_bst *root, char* data){
     return root;
 }
 
+char *min_bst(node_bst *root) {
+    return min_node_bst(root)->data;
+}
+
 struct funs_bst{
     char* str;
     void* ptr;
