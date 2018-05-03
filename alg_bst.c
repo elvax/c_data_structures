@@ -73,7 +73,10 @@ int find_bst(node_bst *root, char* data){
 }
 
 node_bst* min_node_bst(node_bst *node) {
-    node_bst * current = node;
+    if (node == NULL)
+        return NULL;
+
+    node_bst *current = node;
 
     /* loop down to find the leftmost leaf */
     while (current->left_child != NULL)
@@ -86,9 +89,9 @@ node_bst *delete_bst(node_bst *root, char* data){
     if(root == NULL)
         return NULL;
 
-    if (strcmp(data, root->data)) {
+    if (strcmp(data, root->data) < 0) {
         return root->left_child = delete_bst(root->left_child, data);
-    } else if (strcmp(data, root->data)) {
+    } else if (strcmp(data, root->data) > 0) {
         return root->right_child = delete_bst(root->right_child, data);
     } else {
         if (root->left_child == NULL) {
