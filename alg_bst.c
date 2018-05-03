@@ -30,17 +30,20 @@ node_bst* new_node_bst(char* data, node_bst* parent){
 // }
 
 node_bst* insert_bst(node_bst *head, char *data){
-    if (head == NULL) {
+    if (head == NULL)
         return new_node_bst(data, NULL);
+
+    if (strcmp(data, head->data) < 0) {
+        node_bst *new_node = insert_bst(head->left_child, data);    //returns newly created node
+        head->left_child = new_node;
+        new_node->parent = head;                                    //sets parent for new node
+    } else if (strcmp(data, head->data) > 0) {
+        node_bst *new_node = insert_bst(head->right_child, data);
+        head->right_child = new_node;
+        new_node->parent = head;
     }
 
-    /* Otherwise, recur down the tree */
-    if (strcmp(data, head->data) < 0)
-        head->left_child  = insert_bst(head->left_child, data);
-    else if (strcmp(data, head->data) > 0)
-        head->right_child = insert_bst(head->right_child, data);
-
-    /* return the (unchanged) node pointer */
+    // returns unchanged structure when "data" is already in tree
     return head;
 }
 
