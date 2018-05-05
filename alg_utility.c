@@ -11,6 +11,7 @@
 #include <ctype.h>
 #include "alg_utility.h"
 
+
 struct conversion_data_structures {
     DATA_STRUCTURE_TYPE type;
     const char *string;
@@ -22,7 +23,7 @@ struct conversion_data_structures {
 
  struct conversion_str_fun_ptr {
      const char* string;
-     void* (*function)(void*, void*, void*);
+     void* (*function)(void*, void*, functions*);
  } conversion_fun_ptr[] = {
          "insert",
          &insert
@@ -54,8 +55,9 @@ void* insertion(void* ds, char* data, void*(*insert_fun)(void*,char*)){
     return insert_fun(ds, data);
 }
 
-void* insert(void *ds, void *data, void* functions){
-    printf("wstawia do struktury danych %s\n", (char*)data);
+void* insert(void *ds, void *data, functions* functions_struct){
+    functions *fun_pointers = functions_struct;
+    int status = fun_pointers->insert(ds, (char*) data);
 }
 
 char* validate_input(char* data){

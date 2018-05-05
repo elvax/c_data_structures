@@ -8,6 +8,18 @@
 #ifndef CLIONLISTA4_ALG_UTILITY_H
 #define CLIONLISTA4_ALG_UTILITY_H
 
+//typedef struct functions functions;
+//
+//extern functions functions_list;
+//
+//extern functions functions_bst;
+//
+//extern functions functions_rbt;
+//
+//extern functions functions_hmap;
+
+#include "external.h"
+
 typedef enum data_structure_type{bst, rbt, hash_map} DATA_STRUCTURE_TYPE;
 
 typedef struct conversion_data_structures conversion_data_structures;
@@ -23,7 +35,7 @@ void usage();
 
 void* insertion(void* ds, char* data, void*(*insert_fun)(void*,char*));
 
-void *insert(void *ds, void *data, void *functions);
+void *insert(void *ds, void *data, functions *fun);
 
 /**
  * This method removes all non-alpha characters
