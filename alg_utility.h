@@ -48,4 +48,12 @@ void *insert(void *ds, void *data, functions *fun);
  */
 char* validate_input(char* data);
 
+/**
+ * Function reads strings from file splitted by whitespaces
+ * @param ds    pointer to data structure to insert into
+ * @param arg   name of the file
+ * @return
+ */
+void* load(void *ds, void *arg, functions*);
+
 #endif //CLIONLISTA4_ALG_UTILITY_H

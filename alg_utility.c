@@ -25,8 +25,14 @@ struct conversion_data_structures {
      const char* string;
      void* (*function)(void*, void*, functions*);
  } conversion_fun_ptr[] = {
-         "insert",
-         &insert
+         {
+                 "insert",
+                 &insert
+         }, {
+                 "load",
+                 &load,
+         }
+
  };
 
 
@@ -80,4 +86,21 @@ char* validate_input(char* data){
     dest[i+1] = '\0'; // we replace next on with '\0' (end of string)
 
     return dest;
+}
+
+void* load(void *ds, void *arg, functions* functions_struct){
+    functions *fun_pointers = functions_struct;
+    char input[100];
+    char *validated_input;
+
+    FILE *file = fopen((char*) arg, "r");
+    if (file == NULL){
+        printf("cant't open file %s\n", (char*) arg);
+    }
+
+    while (fscanf(file, "%s", input) > 0) {
+        validated_input = validate_input(input);
+        fun_pointers->insert(ds, validated_input);
+    }
+    fclose(file);
 }
