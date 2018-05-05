@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "alg_utility.h"
 
 struct conversion_data_structures {
@@ -55,4 +56,26 @@ void* insertion(void* ds, char* data, void*(*insert_fun)(void*,char*)){
 
 void* insert(void *ds, void *data, void* functions){
     printf("wstawia do struktury danych %s\n", (char*)data);
+}
+
+char* validate_input(char* data){
+    char* dest = malloc(strlen(data) + 1);
+    char *src = data;
+    while (*src) {
+        if(isalpha(*src))
+            break;
+        *src++;
+    }
+    // after loop src points to first alpha character
+
+    strcpy(dest, src); //copy that part of string
+    int i;
+    for ( i = strlen(dest)-1; i >= 0; i--) {
+        if(isalpha(dest[i]))
+            break;
+    }
+    // after loop dest[i] is last alpha character in string
+    dest[i+1] = '\0'; // we replace next on with '\0' (end of string)
+
+    return dest;
 }

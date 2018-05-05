@@ -25,4 +25,15 @@ void* insertion(void* ds, char* data, void*(*insert_fun)(void*,char*));
 
 void *insert(void *ds, void *data, void *functions);
 
+/**
+ * This method removes all non-alpha characters
+ * from the beginning and ending of given string, yet
+ * preserves non-alpha characters between alpha characters
+ * int the middle of given string.
+ * @param data      input string
+ * @return char*    new string that satisfies above
+ *                  mentioned conditions
+ */
+char* validate_input(char* data);
+
 #endif //CLIONLISTA4_ALG_UTILITY_H
