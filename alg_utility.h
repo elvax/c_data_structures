@@ -56,4 +56,14 @@ char* validate_input(char* data);
  */
 void* load(void *ds, void *arg, functions*);
 
+
+/**
+ * Function searches for given value in data structure
+ * @param ds    pointer to data structure
+ * @param arg   pointer to value to search for
+ * @return      1 if found with success
+ *              0 otherwise
+ */
+void* find(void *ds, void *arg, functions*);
+
 #endif //CLIONLISTA4_ALG_UTILITY_H

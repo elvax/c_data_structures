@@ -30,7 +30,10 @@ struct conversion_data_structures {
                  &insert
          }, {
                  "load",
-                 &load,
+                 &load
+         }, {
+                 "find",
+                 &find
          }
 
  };
@@ -103,4 +106,9 @@ void* load(void *ds, void *arg, functions* functions_struct){
         fun_pointers->insert(ds, validated_input);
     }
     fclose(file);
+}
+
+void* find(void *ds, void *arg, functions* functions_struct){
+    functions *fun_pointers = functions_struct;
+    printf("%d\n", fun_pointers->find(ds, (char*) arg));
 }
