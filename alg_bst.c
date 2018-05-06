@@ -111,6 +111,9 @@ node_bst *delete_bst(node_bst *root, char* data){
 }
 
 char *min_bst(node_bst *root) {
+    if (root == NULL)
+        return "";
+
     return min_node_bst(root)->data;
 }
 
