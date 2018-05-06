@@ -73,6 +73,12 @@ int get_no_elements_hmap(hmap *hmap1);
  */
 int find_hmap(void* hmap, char* data);
 
+/**
+ * Prints all values in given hash map
+ * @param hmap1
+ */
+void print_all_data_hmap(void* hmap1);
+
 //void insert(void* data_structure, char* data);
 
 #endif //CLIONLISTA4_HMAP_H

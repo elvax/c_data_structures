@@ -137,3 +137,13 @@ int find_hmap(void* hmap1, char* data){
     //otherwise find element
     return hash_map->arr[hash_index].functions->find(hash_map->arr[hash_index].data_structure, data);
 }
+
+void print_all_data_hmap(void* hmap1){
+    hmap *hash_map = hmap1;
+    int size = hash_map->size;
+    int i;
+    for (i = 0; i < size; i++) {
+        if(hash_map->arr[i].size > 0)
+            print_alldata_node_hmap(hash_map, i);
+    }
+}
