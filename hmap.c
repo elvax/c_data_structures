@@ -147,3 +147,7 @@ void print_all_data_hmap(void* hmap1){
             print_alldata_node_hmap(hash_map, i);
     }
 }
+
+char* min_hmap(void* ds){
+    return "";
+}

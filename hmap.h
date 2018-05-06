@@ -79,6 +79,13 @@ int find_hmap(void* hmap, char* data);
  */
 void print_all_data_hmap(void* hmap1);
 
+/**
+ * In hash map we can't find min value,
+ * blank character is returned then.
+ * @param ds    pointer to hash map
+ * @return      "" - nothing
+ */
+char* min_hmap(void* ds);
 //void insert(void* data_structure, char* data);
 
 #endif //CLIONLISTA4_HMAP_H
