@@ -276,6 +276,9 @@ int find_rbt(void* root, char *data){
 }
 
 char* min_rbt(node_rbt *root){
+    if (root == NULL)
+        return "";
+
     node_rbt *current = root;
     while (current->left_child != &NIL)
         current = current->left_child;
