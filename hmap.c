@@ -155,3 +155,7 @@ void print_all_data_hmap(void* hmap1){
 char* min_hmap(void* ds){
     return "";
 }
+
+char *max_hmap(void *ds){
+    return "";
+}
