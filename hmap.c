@@ -68,11 +68,13 @@ int insert_hmap(void* data_structure, char* data){
     //if sprawdzający size i zmieniający strukture
 
     if(hmap->arr[hash_index].data_structure == NULL){
-        hmap->arr[hash_index].data_structure = new_node_list(data, NULL, NULL); //TODO zmienic
+//        hmap->arr[hash_index].data_structure = new_node_list(data, NULL, NULL);
+        hmap->arr[hash_index].data_structure = new_linked_list();
         hmap->arr[hash_index].functions = &functions_list;
+        hmap->arr[hash_index].functions->insert(hmap->arr[hash_index].data_structure, data);
         hmap->arr[hash_index].size++;
         increment_elements_hmap(hmap);
-    } else if (hmap->arr[hash_index].size > 2) {
+    } else if (hmap->arr[hash_index].size > 1) {
         if ( hmap->arr[hash_index].functions->insert(hmap->arr[hash_index].data_structure, data)){
             hmap->arr[hash_index].data_structure = convert_to_rbt(hmap, hash_index);
             hmap->arr[hash_index].functions = &functions_rbt;
@@ -89,13 +91,15 @@ int insert_hmap(void* data_structure, char* data){
 
 }
 
-node_rbt* convert_to_rbt(hmap *hmap1, int hash_index){
-    node_list *head_list = get_data_structure_hmap(hmap1, hash_index);
-    node_rbt *new_data_structure = create_bst(get_data_list(head_list));
+rb_tree* convert_to_rbt(hmap *hmap1, long hash_index){
+    linked_list *list = get_data_structure_hmap(hmap1, hash_index);
+    rb_tree *new_data_structure = new_rb_tree();
+//            create_bst(get_data_list(head_list));
 
-    node_list *current = head_list;
-    while ((current = get_next(current)) != NULL){
+    node_list *current = get_head_list(list);
+    while (current != NULL){
         insert_rbt(new_data_structure, get_data_list(current));
+        current = get_next(current);
     }
     // TODO delete list
     return new_data_structure;

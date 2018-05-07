@@ -50,7 +50,7 @@ void print_alldata_node_hmap(hmap* hmap1, int index);
 
 void printTest();
 
-node_rbt* convert_to_rbt(hmap *hmap1, int hash_index);
+rb_tree* convert_to_rbt(hmap *hmap1, long hash_index);
 
 void* get_data_structure_hmap(hmap *hmap1, int hash_index);
 
