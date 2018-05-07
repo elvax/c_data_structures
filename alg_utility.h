@@ -66,4 +66,35 @@ void* load(void *ds, void *arg, functions*);
  */
 void* find(void *ds, void *arg, functions*);
 
+/**
+ * Prints minimum value in data structure
+ * or new line if can't find any.
+ * @param ds    pointer to data structure
+ * @param arg   unused
+ * @return      min value in datastructure
+ *              or new line '\n'
+ */
+void* min(void *ds, void *arg, functions*);
+
+/**
+ * Prints maximum value in data structure
+ * or new line if can't find any.
+ * @param ds    pointer to data structure
+ * @param arg   unused
+ * @return      max value in datastructure
+ *              or new line '\n'
+ */
+void* max(void *ds, void *arg, functions*);
+
+/**
+ * Prints next lexicographical value of value given as argument.
+ * If successor doesn't exist or can't obtain any (ex hash map)
+ * new line is printed instead.
+ * @param ds    pointer to data structure
+ * @param arg   value which successor is printed
+ * @return      successor value in datastructure
+ *              or new line '\n'
+ */
+void* successor(void *ds, void *arg, functions*);
+
 #endif //CLIONLISTA4_ALG_UTILITY_H

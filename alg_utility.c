@@ -26,14 +26,11 @@ struct conversion_data_structures {
      void* (*function)(void*, void*, functions*);
  } conversion_fun_ptr[] = {
          {
-                 "insert",
-                 &insert
+                 "insert", &insert
          }, {
-                 "load",
-                 &load
+                 "load", &load
          }, {
-                 "find",
-                 &find
+                 "find", &find
          }
 
  };
@@ -111,4 +108,19 @@ void* load(void *ds, void *arg, functions* functions_struct){
 void* find(void *ds, void *arg, functions* functions_struct){
     functions *fun_pointers = functions_struct;
     printf("%d\n", fun_pointers->find(ds, (char*) arg));
+}
+
+void* min(void *ds, void *arg, functions* functions_struct){
+    functions *fun_pointers = functions_struct;
+    printf("%s\n", fun_pointers->min(ds));
+}
+
+void* max(void *ds, void *arg, functions* functions_struct){
+    functions *fun_pointers = functions_struct;
+    printf("%s\n", fun_pointers->max(ds));
+}
+
+void *successor(void *ds, void *arg, functions *functions_struct){
+    functions *fun_pointers = functions_struct;
+    printf("%s\n", fun_pointers->successor(ds, (char *) arg));
 }
