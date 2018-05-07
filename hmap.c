@@ -118,6 +118,10 @@ void delete_hmap(struct hmap* hmap, char* data){
     hmap->arr[hash_index].size = hmap->arr[hash_index].functions->count_elements(hmap->arr[hash_index].data_structure);
 }
 
+int count_elements_hmap(void* ds){
+
+}
+
 
 void printTest(){
     printf("test = %d\n", test);
@@ -160,6 +164,6 @@ char *max_hmap(void *ds){
     return "";
 }
 
-char* successor_hmap(void* ds){
+char* successor_hmap(void* ds, char* data){
     return "";
 }

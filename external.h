@@ -17,7 +17,13 @@ typedef struct functions{
 
     void *(*delete)(void *, char *);
 
-    int (*count_elements)(void*);
+    int (*count_elements)(void *);
+
+    char* (*min)(void*);
+
+    char* (*max)(void*);
+
+    char *(*successor)(void *, char *);
 }functions;
 
 extern functions functions_list;

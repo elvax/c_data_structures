@@ -101,7 +101,9 @@ char* max_hmap(void* ds);
  * @param ds    pointer to hash map
  * @return      ""
  */
-char* successor_hmap(void* ds);
+char* successor_hmap(void* ds, char*);
 //void insert(void* data_structure, char* data);
+
+int count_elements_hmap(void* ds);
 
 #endif //CLIONLISTA4_HMAP_H
