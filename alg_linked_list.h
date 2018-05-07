@@ -18,6 +18,15 @@ int insert_list(void* ds, char* data);
 
 void print_all_data_list(void*);
 
+/**
+ * Function searches for given value in list
+ * @param ds    pointer to list
+ * @param arg   pointer to value to search for
+ * @return      1 if found with success
+ *              0 otherwise
+ */
+int find_list(void*, char*);
+
 node_list* new_node_list(char *data, node_list *prev, node_list *next);
 
 node_list* get_next( void*);

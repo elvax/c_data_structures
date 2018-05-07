@@ -47,6 +47,11 @@ void print_all_data_list(void* ds){
     _print_all_data_list(linkedList->head);
 }
 
+int find_list(void *ds, char *data) {
+    linked_list *linkedList = ds;
+    return _find_list(linkedList->head, data);
+}
+
 node_list* get_next( void* data_strucutre){
     node_list *head = data_strucutre;
     return head->next;
