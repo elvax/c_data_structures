@@ -34,8 +34,14 @@ int insert_list(void* ds, char* data){
         linkedList->no_elements++;
         return 1;
     } else {
+        //TODO inkrementacja no_elements
         return _insert_list(linkedList->head, data);
     }
+}
+
+void print_all_data_list(void* ds){
+    linked_list *linkedList = ds;
+    _print_all_data_list(linkedList->head);
 }
 
 node_list* get_next( void* data_strucutre){

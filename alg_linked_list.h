@@ -16,6 +16,8 @@ linked_list *new_linked_list();
 
 int insert_list(void* ds, char* data);
 
+void print_all_data_list(void*);
+
 node_list* new_node_list(char *data, node_list *next);
 node_list* get_next( void*);
 int _insert_list(void* data_structure, char* data);
