@@ -11,7 +11,7 @@
 #include "hmap.h"
 #include "alg_bst.h"
 
-functions functions_list = { &_insert_list,
+functions functions_list = { &insert_list,
                              &_print_all_data_list,
                              &_find_list,
                              &_delete_list,
