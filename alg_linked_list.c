@@ -75,6 +75,19 @@ char* successor_list(void* ds, char* data){
     return "";
 }
 
+void print_inorder_list(void* ds){
+    linked_list *linkedList = ds;
+    if (linkedList == NULL || linkedList->no_elements == 0) {
+        printf("\n");
+    } else {
+        node_list *current = linkedList->head;
+        while (current != NULL) {
+            printf("%s\n", current->data);
+            current = current->next;
+        }
+    }
+}
+
 node_list* get_next( void* data_strucutre){
     node_list *head = data_strucutre;
     return head->next;

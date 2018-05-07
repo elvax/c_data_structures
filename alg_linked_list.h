@@ -54,6 +54,12 @@ char* max_list(void* ds);
  */
 char* successor_list(void* ds, char* data);
 
+/**
+ * Prints data from list lexicographically
+ * @param ds    pointer to list
+ */
+void print_inorder_list(void* ds);
+
 node_list* new_node_list(char *data, node_list *prev, node_list *next);
 
 node_list* get_next( void*);
