@@ -10,10 +10,20 @@
 #include <stdio.h>
 #include "alg_linked_list.h"
 
- struct node_list{
+struct linked_list{
+    int no_elements;
+    struct node_list *head;
+};
+
+struct node_list{
     struct node_list *next;
     char *data;
 };
+
+linked_list *new_linked_list(){
+    linked_list *new = (linked_list *) malloc(sizeof(linked_list));
+    return new;
+}
 
 node_list* get_next( void* data_strucutre){
     node_list *head = data_strucutre;

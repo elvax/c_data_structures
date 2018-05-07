@@ -8,7 +8,11 @@
 #ifndef CLIONLISTA4_ALG_LINKED_LIST_H
 #define CLIONLISTA4_ALG_LINKED_LIST_H
 
+typedef struct linked_list linked_list;
+
 typedef struct node_list node_list;
+
+linked_list *new_linked_list();
 
 node_list* new_node_list(char *data, node_list *next);
 node_list* get_next( void*);
