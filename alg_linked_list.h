@@ -43,7 +43,16 @@ char* min_list(void* ds);
  * @return      data from minimum node
  *              "" if list is empty
  */
-char* max_list(void* ds)
+char* max_list(void* ds);
+
+/**
+ * Function prints successor of given data in list
+ * @param ds    pinter to list
+ * @param data  input data
+ * @return      data from successor node
+ *              "" if no successor of invalid input data
+ */
+char* successor_list(void* ds, char* data);
 
 node_list* new_node_list(char *data, node_list *prev, node_list *next);
 

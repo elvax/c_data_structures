@@ -62,6 +62,19 @@ char* max_list(void* ds){
     return (linkedList->head == NULL) ? "" : linkedList->head->prev->data;
 }
 
+char* successor_list(void* ds, char* data){
+    linked_list *linkedList = ds;
+    node_list* current = linkedList->head;
+    while (current != NULL){
+        if (!strcmp(data, current->data)) {
+            return (current->next != NULL) ? current->next->data : "";
+        } else {
+            current = current->next;
+        }
+    }
+    return "";
+}
+
 node_list* get_next( void* data_strucutre){
     node_list *head = data_strucutre;
     return head->next;
