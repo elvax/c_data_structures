@@ -11,6 +11,25 @@
 #include "alg_bst.h"
 #include <stdio.h>
 
+struct bs_tree{
+    int no_elements;
+    node_bst *root;
+};
+
+struct node_bst{
+    char* data;
+    struct node_bst *left_child;
+    struct node_bst *right_child;
+    struct node_bst *parent;
+};
+
+bs_tree *new_bs_tree(){
+    bs_tree *new = (bs_tree *) malloc(sizeof(bs_tree));
+    new->no_elements = 0;
+    new->root = NULL;
+    return new;
+}
+
 node_bst* new_node_bst(char* data, node_bst* parent){
     node_bst* new = (node_bst*) malloc(sizeof(node_bst));
     new->data = data;

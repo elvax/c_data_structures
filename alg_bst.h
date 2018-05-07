@@ -8,17 +8,14 @@
 #ifndef CLIONLISTA4_ALG_BST_H
 #define CLIONLISTA4_ALG_BST_H
 
+typedef struct bs_tree bs_tree;
 
+typedef struct node_bst node_bst;
 
-typedef struct node_bst{
-    char* data;
-    struct node_bst *left_child;
-    struct node_bst *right_child;
-    struct node_bst *parent;
-} node_bst;
+bs_tree *new_bs_tree();
 
 node_bst* new_node_bst(char* data, node_bst* parent);
-node_bst* insert(node_bst* root, char* data);
+//node_bst* insert(node_bst* root, char* data);
 
 node_bst *insert_bst(node_bst *head, char *data);
 
