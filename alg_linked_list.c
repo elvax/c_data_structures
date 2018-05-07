@@ -39,6 +39,7 @@ int insert_list(void* ds, char* data){
     } else {
         //TODO inkrementacja no_elements
         linkedList->head = _insert_list(linkedList->head, data);
+        linkedList->no_elements++;
     }
 }
 
@@ -86,6 +87,10 @@ void print_inorder_list(void* ds){
             current = current->next;
         }
     }
+}
+
+node_list *get_head_list(linked_list *list){
+    return  list->head;
 }
 
 node_list* get_next( void* data_strucutre){
@@ -200,7 +205,7 @@ int _count_elements_list(void *data_structure) {
     return counter;
 }
 
-void _print_all_data_list(void* data_structure){
+void _print_all_data_list(node_list* data_structure){
     node_list* head = data_structure;
 
     node_list* crawler=head;
