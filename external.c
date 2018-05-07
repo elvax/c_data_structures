@@ -21,14 +21,14 @@ functions functions_list = { &insert_list,
 //poprawić
 functions functions_bst = { &insert_bs_tree,
                             &print_inorder_rbt,
-                            &find_rbt,
+                            &find_bs_tree,
                             &delete_rbt,
                             &count_elements_rbt
 };
 
 functions functions_rbt = { &insert_rbt,
                             &print_inorder_rbt,
-                            &find_rbt,
+                            &find_rb_tree,
                             &delete_rbt,
                             &count_elements_rbt
 };

@@ -10,6 +10,11 @@
 #include <string.h>
 #include "alg_rbt.h"
 
+struct rb_tree{
+    int no_elements;
+    node_rbt* root;
+};
+
 enum color{RED, BLACK};
 
 struct node_rbt{
@@ -20,6 +25,13 @@ struct node_rbt{
     enum color color;
 } NIL = {"jestem nil", NULL, NULL, NULL, BLACK};
 
+
+rb_tree *new_rb_tree(){
+    rb_tree *new = (rb_tree *) malloc(sizeof(rb_tree));
+    new->no_elements = 0;
+    new->root = NULL;
+    return new;
+}
 
 node_rbt *create_bst(char *data){
     node_rbt *new_root = new_leaf_rbt(&NIL, data);
@@ -109,13 +121,26 @@ void fix_rbt(node_rbt *root){
     }
 }
 
-int insert_rbt(void *root, char *data){
-    node_rbt *new_node = new_leaf_rbt(NULL, data);
-    int status = _insert_rbt(root, new_node);
+int insert_rbt(void *ds, char *data){
+    rb_tree *rbTree = ds;
 
-    insert_repair_tree(new_node);
+    if (rbTree == NULL) {
+        printf("error null pointer\n");
+        exit(-1);
+    }
 
-    return status;
+    if (rbTree->root == NULL || rbTree->no_elements == 0) {
+        rbTree->root = create_bst(data);
+        rbTree->no_elements++;
+    } else {
+        node_rbt *new_node = new_leaf_rbt(NULL, data);
+        int status = _insert_rbt(rbTree->root, new_node);
+        rbTree->no_elements++;
+
+        insert_repair_tree(new_node);
+
+        return status;
+    }
 }
 
 void insert_repair_tree(node_rbt* n) {
@@ -244,12 +269,25 @@ void rotate_right(node_rbt* y) {
 
 }
 
-void print_inorder_rbt(void *root){
+void print_inorder_rbt(void *ds){
+    rb_tree *rbTree = ds;
+    if (rbTree == NULL) {
+        printf("error null pointer\n");
+        exit(-1);
+    }
+    if (rbTree->root == NULL || rbTree->no_elements == 0) {
+        printf("\n");
+    } else {
+        _print_inorder_rbt(rbTree->root);
+    }
+}
+
+void _print_inorder_rbt(node_rbt *root){
     node_rbt *current = root;
     if (root != NULL) {
-        print_inorder_rbt(current->left_child);
+        _print_inorder_rbt(current->left_child);
         printf("%s %d \n", current->data, current->color);
-        print_inorder_rbt(current->right_child);
+        _print_inorder_rbt(current->right_child);
     }
 }
 
@@ -261,7 +299,16 @@ int is_leaf(node_rbt *node){
     return (node->left_child->data == "" && node->right_child->data == "") ? 1 : 0;
 }
 
-int find_rbt(void* root, char *data){
+int find_rb_tree(void* ds, char* data){
+    rb_tree *rbTree = ds;
+    if (rbTree == NULL) {
+        printf("error null pointer\n");
+        exit(-1);
+    }
+    return (rbTree->root == NULL || rbTree->no_elements == 0) ? 0 : _find_rbt(rbTree->root, data);
+}
+
+int _find_rbt( node_rbt* root, char *data){
     node_rbt *current = root;
     while (current != &NIL) {
         if (strcmp(data, current->data) < 0) {
@@ -275,7 +322,16 @@ int find_rbt(void* root, char *data){
     return 0;
 }
 
-char* min_rbt(node_rbt *root){
+char* min_rb_tree(void* ds){
+    rb_tree *rbTree = ds;
+    if (rbTree == NULL) {
+        printf("error null pointer\n");
+        exit(-1);
+    }
+    return (rbTree->root == NULL || rbTree->no_elements == 0) ? 0 : _min_rbt(rbTree->root);
+}
+
+char* _min_rbt(node_rbt *root){
     if (root == NULL)
         return "";
 
@@ -285,7 +341,16 @@ char* min_rbt(node_rbt *root){
     return current->data;
 }
 
-char* max_rbt(node_rbt *root){
+char* max_rb_tree(void* ds){
+    rb_tree *rbTree = ds;
+    if (rbTree == NULL) {
+        printf("error null pointer\n");
+        exit(-1);
+    }
+    return (rbTree->root == NULL || rbTree->no_elements == 0) ? 0 : _max_rbt(rbTree->root);
+}
+
+char* _max_rbt(node_rbt *root){
     node_rbt *current = root;
     while (current->right_child != &NIL)
     current = current->right_child;
@@ -300,10 +365,19 @@ int count_elements_rbt(void* data_strucutre){
 
 }
 
-char *successor_rbt(void *data_strucuture, char *key) {
+char* successor_rb_tree(void* ds, char* data) {
+    rb_tree *rbTree = ds;
+    if (rbTree == NULL) {
+        printf("error null pointer\n");
+        exit(-1);
+    }
+    return (rbTree->root == NULL || rbTree->no_elements == 0) ? "" : _successor_rbt(rbTree->root, data);
+}
+
+char *_successor_rbt( node_rbt *data_strucuture, char *key) {
     node_rbt *node = get_node_of_val_rbt(data_strucuture, key);
     if (node->right_child != &NIL)
-        return min_rbt(node->right_child);
+        return _min_rbt(node->right_child);
 
     node_rbt *parent = node->parent;
     while (parent != &NIL && node == parent->right_child) {

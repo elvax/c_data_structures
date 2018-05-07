@@ -8,11 +8,13 @@
 #ifndef CLIONLISTA4_ALG_RBT_H
 #define CLIONLISTA4_ALG_RBT_H
 
+typedef struct rb_tree rb_tree;
+
 typedef struct node_rbt node_rbt;
 
 typedef enum color COLOR;
 
-
+rb_tree *new_rb_tree();
 
 node_rbt *create_bst(char*);
 
@@ -50,23 +52,33 @@ void rotate_left(node_rbt* n);
 
 void rotate_right(node_rbt* n);
 
-void print_inorder_rbt(void *root);
+void print_inorder_rbt(void *ds);
+
+void _print_inorder_rbt(node_rbt *root);
 
 void print_root(node_rbt *);
 
 int is_leaf(node_rbt *node);
 
-int find_rbt(void *root, char *data);
+int find_rb_tree(void *root, char *data);
 
-char *min_rbt(node_rbt *root);
+int _find_rbt(node_rbt *root, char *data);
 
-char *max_rbt(node_rbt *root);
+char *min_rb_tree(void *root);
+
+char *_min_rbt(node_rbt *root);
+
+char *max_rb_tree(void *root);
+
+char *_max_rbt(node_rbt *root);
 
 void *delete_rbt(void *, char *);
 
 int count_elements_rbt(void*);
 
-char* successor_rbt(void*, char*);
+char* successor_rb_tree(void*, char*);
+
+char* _successor_rbt(node_rbt*, char*);
 
 node_rbt* get_node_of_val_rbt(void* ds, char* data);
 
