@@ -22,13 +22,27 @@ int insert_bs_tree(void* ds, char* data);
 
 void print_inorder_bs_tree(void* ds);
 
+int find_bs_tree(void* ds, char* data);
+
+char* min_bs_tree(void* ds);
+
+char* max_bs_tree(void* ds);
+
+char* successor_bs_tree(void* ds, char* data);
+
+char* _successor_bs_tree(node_bst* n, char* data);
+
+node_bst* get_node_of_val_bst(void* ds, char* data);
+
 void _print_inorder_bst(node_bst *root);
 
 void* get_function(char* string);
 
-int find_bst(node_bst *root, char* data);
+int _find_bst(node_bst *root, char* data);
 
-node_bst* min_node_bst(node_bst *node);
+node_bst* _min_node_bst(node_bst *node);
+
+node_bst* _max_node_bst(node_bst *node);
 
 node_bst *delete_bst(node_bst *root, char* data);
 

@@ -73,7 +73,6 @@ void print_inorder_bs_tree(void* ds){
         return;
     }
     _print_inorder_bst(bsTree->root);
-
 }
 
 void _print_inorder_bst(node_bst *root){
@@ -84,7 +83,15 @@ void _print_inorder_bst(node_bst *root){
     }
 }
 
-int find_bst(node_bst *root, char* data){
+int find_bs_tree(void* ds, char* data){
+    bs_tree *bsTree = ds;
+    if (bsTree == NULL || bsTree->no_elements == 0)
+        return 0;
+
+    return _find_bst(bsTree->root, data);
+}
+
+int _find_bst(node_bst *root, char* data){
     if(root == NULL) return 0;
 
     node_bst *current = root;
@@ -101,15 +108,65 @@ int find_bst(node_bst *root, char* data){
     return 0;
 }
 
-node_bst* min_node_bst(node_bst *node) {
-    if (node == NULL)
-        return NULL;
+char* min_bs_tree(void* ds){
+    bs_tree *bsTree = ds;
+    return (bsTree == NULL || bsTree->no_elements == 0) ? "" : _min_node_bst(bsTree->root)->data;
+}
 
+char* max_bs_tree(void* ds){
+    bs_tree *bsTree = ds;
+    return (bsTree == NULL || bsTree->no_elements == 0) ? "" : _max_node_bst(bsTree->root)->data;
+}
+
+char* successor_bs_tree(void* ds, char* data){
+    bs_tree *bsTree = ds;
+    return (bsTree == NULL || bsTree->no_elements == 0) ? "" : _successor_bs_tree(bsTree->root, data);
+}
+
+char* _successor_bs_tree(node_bst* ds, char* data){
+    node_bst *node = get_node_of_val_bst(ds, data);
+    if (node->right_child != NULL)
+        return min_bst(node->right_child);
+
+    node_bst *parent = node->parent;
+    while (parent != NULL && node == parent->right_child) {
+        node = parent;
+        parent = parent->parent;
+    }
+    return parent->data;
+
+}
+
+node_bst* get_node_of_val_bst(void* ds, char* data){
+    node_bst *current = ds;
+    while (current != NULL) {
+        if (strcmp(data, current->data) < 0) {
+            current = current->left_child;
+        } else if (strcmp(data, current->data) > 0){
+            current = current->right_child;
+        } else {
+            break;
+        }
+    }
+    return current;
+}
+
+node_bst* _min_node_bst(node_bst *node) {
     node_bst *current = node;
 
     /* loop down to find the leftmost leaf */
     while (current->left_child != NULL)
         current = current->left_child;
+
+    return current;
+}
+
+node_bst* _max_node_bst(node_bst *node) {
+    node_bst *current = node;
+
+    /* loop down to find the leftmost leaf */
+    while (current->right_child != NULL)
+        current = current->right_child;
 
     return current;
 }
@@ -132,7 +189,7 @@ node_bst *delete_bst(node_bst *root, char* data){
             free(root);
             return tmp;
         }
-        node_bst *tmp = min_node_bst(root->right_child);
+        node_bst *tmp = _min_node_bst(root->right_child);
         root->data = tmp->data;
         root->right_child = delete_bst(root->right_child, tmp->data);
     }
@@ -143,7 +200,7 @@ char *min_bst(node_bst *root) {
     if (root == NULL)
         return "";
 
-    return min_node_bst(root)->data;
+    return _min_node_bst(root)->data;
 }
 
 //struct funs_bst{
