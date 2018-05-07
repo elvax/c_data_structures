@@ -159,3 +159,7 @@ char* min_hmap(void* ds){
 char *max_hmap(void *ds){
     return "";
 }
+
+char* successor_hmap(void* ds){
+    return "";
+}

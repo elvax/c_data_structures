@@ -94,6 +94,14 @@ char* min_hmap(void* ds);
  * @return      ""
  */
 char* max_hmap(void* ds);
+
+/**
+ * In hash map we can't find successor of value,
+ * blank character is returned then.
+ * @param ds    pointer to hash map
+ * @return      ""
+ */
+char* successor_hmap(void* ds);
 //void insert(void* data_structure, char* data);
 
 #endif //CLIONLISTA4_HMAP_H
