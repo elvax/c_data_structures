@@ -22,7 +22,20 @@ struct node_list{
 
 linked_list *new_linked_list(){
     linked_list *new = (linked_list *) malloc(sizeof(linked_list));
+    new->no_elements = 0;
+    new->head = NULL;
     return new;
+}
+
+int insert_list(void* ds, char* data){
+    linked_list *linkedList = ds;
+    if (linkedList->head == NULL){
+        linkedList->head = new_node_list(data, NULL);
+        linkedList->no_elements++;
+        return 1;
+    } else {
+        return _insert_list(linkedList->head, data);
+    }
 }
 
 node_list* get_next( void* data_strucutre){
