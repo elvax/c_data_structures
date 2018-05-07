@@ -15,11 +15,14 @@ typedef struct node_bst node_bst;
 bs_tree *new_bs_tree();
 
 node_bst* new_node_bst(char* data, node_bst* parent);
-//node_bst* insert(node_bst* root, char* data);
 
-node_bst *insert_bst(node_bst *head, char *data);
+node_bst *_insert_node_bst(node_bst *head, char *data);
 
-void print_inorder_bst(node_bst *root);
+int insert_bs_tree(void* ds, char* data);
+
+void print_inorder_bs_tree(void* ds);
+
+void _print_inorder_bst(node_bst *root);
 
 void* get_function(char* string);
 

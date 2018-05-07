@@ -19,7 +19,7 @@ functions functions_list = { &insert_list,
 };
 
 //poprawić
-functions functions_bst = { &insert_bst,
+functions functions_bst = { &insert_bs_tree,
                             &print_inorder_rbt,
                             &find_rbt,
                             &delete_rbt,

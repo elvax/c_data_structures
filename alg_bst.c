@@ -35,42 +35,52 @@ node_bst* new_node_bst(char* data, node_bst* parent){
     new->data = data;
     new->parent = parent;
     new->left_child = new->right_child = NULL;
-
     return new;
 }
-// node_bst* insert(node_bst* root, char* data){
-//
-//   if (root == NULL)
-//     return new_node_bst(data, NULL);
-//
-//   if (strcmp(data, root->data)){
-//     root->left_child = insert(node->left_child,
-//   }
-// }
 
-node_bst* insert_bst(node_bst *head, char *data){
+node_bst* _insert_node_bst(node_bst *head, char *data){
     if (head == NULL)
         return new_node_bst(data, NULL);
 
     if (strcmp(data, head->data) < 0) {
-        node_bst *new_node = insert_bst(head->left_child, data);    //returns newly created node
+        node_bst *new_node = _insert_node_bst(head->left_child, data);    //returns newly created node
         head->left_child = new_node;
         new_node->parent = head;                                    //sets parent for new node
     } else if (strcmp(data, head->data) > 0) {
-        node_bst *new_node = insert_bst(head->right_child, data);
+        node_bst *new_node = _insert_node_bst(head->right_child, data);
         head->right_child = new_node;
         new_node->parent = head;
     }
-
     // returns unchanged structure when "data" is already in tree
     return head;
 }
 
-void print_inorder_bst(node_bst *root){
+int insert_bs_tree(void* ds, char* data){
+    bs_tree *bsTree = ds;
+
+    if (bsTree == NULL) {
+        printf("error NULL pointer\n");
+        exit(-1);
+    }
+    bsTree->root = _insert_node_bst(bsTree->root, data);
+    bsTree->no_elements++;
+}
+
+void print_inorder_bs_tree(void* ds){
+    bs_tree * bsTree = ds;
+    if (bsTree == NULL || bsTree->no_elements == 0){
+        printf("\n");
+        return;
+    }
+    _print_inorder_bst(bsTree->root);
+
+}
+
+void _print_inorder_bst(node_bst *root){
     if (root != NULL) {
-        print_inorder_bst(root->left_child);
+        _print_inorder_bst(root->left_child);
         printf("%s \n", root->data);
-        print_inorder_bst(root->right_child);
+        _print_inorder_bst(root->right_child);
     }
 }
 
@@ -136,21 +146,21 @@ char *min_bst(node_bst *root) {
     return min_node_bst(root)->data;
 }
 
-struct funs_bst{
-    char* str;
-    void* ptr;
-} funs_bst_array[] = {
-        { "insert", &insert_bst },
-        { "print",  &print_inorder_bst }
-};
-
-void* get_function(char* str){
-    int j;
-    for (j = 0; j < sizeof(funs_bst_array) / sizeof(funs_bst_array[0]); ++j)
-        if ( !strcmp (str, funs_bst_array[j].str) )
-            return funs_bst_array[j].ptr;
-
-}
+//struct funs_bst{
+//    char* str;
+//    void* ptr;
+//} funs_bst_array[] = {
+//        { "insert", &insert_bst },
+//        { "print",  &print_inorder_bst }
+//};
+//
+//void* get_function(char* str){
+//    int j;
+//    for (j = 0; j < sizeof(funs_bst_array) / sizeof(funs_bst_array[0]); ++j)
+//        if ( !strcmp (str, funs_bst_array[j].str) )
+//            return funs_bst_array[j].ptr;
+//
+//}
 
 
 
