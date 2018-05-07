@@ -27,6 +27,14 @@ void print_all_data_list(void*);
  */
 int find_list(void*, char*);
 
+/**
+ * Function prints min value in list
+ * @param ds    pointer to list
+ * @return      data from minimum node
+ *              "" if list is empty
+ */
+char* min_list(void* ds);
+
 node_list* new_node_list(char *data, node_list *prev, node_list *next);
 
 node_list* get_next( void*);

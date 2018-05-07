@@ -52,6 +52,11 @@ int find_list(void *ds, char *data) {
     return _find_list(linkedList->head, data);
 }
 
+char* min_list(void* ds){
+    linked_list *linkedList = ds;
+    return (linkedList->head == NULL) ? "" : linkedList->head->data;
+}
+
 node_list* get_next( void* data_strucutre){
     node_list *head = data_strucutre;
     return head->next;

@@ -68,7 +68,7 @@ int insert_hmap(void* data_structure, char* data){
     //if sprawdzający size i zmieniający strukture
 
     if(hmap->arr[hash_index].data_structure == NULL){
-        hmap->arr[hash_index].data_structure = new_node_list(data, NULL);
+        hmap->arr[hash_index].data_structure = new_node_list(data, NULL, NULL); //TODO zmienic
         hmap->arr[hash_index].functions = &functions_list;
         hmap->arr[hash_index].size++;
         increment_elements_hmap(hmap);
