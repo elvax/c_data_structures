@@ -35,6 +35,16 @@ int find_list(void*, char*);
  */
 char* min_list(void* ds);
 
+/**
+ * Function prints max value in list. Since list
+ * is self sorted and has pointer to last node this
+ * operation in const in time.
+ * @param ds    pointer to list
+ * @return      data from minimum node
+ *              "" if list is empty
+ */
+char* max_list(void* ds)
+
 node_list* new_node_list(char *data, node_list *prev, node_list *next);
 
 node_list* get_next( void*);

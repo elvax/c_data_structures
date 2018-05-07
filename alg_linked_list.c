@@ -57,6 +57,11 @@ char* min_list(void* ds){
     return (linkedList->head == NULL) ? "" : linkedList->head->data;
 }
 
+char* max_list(void* ds){
+    linked_list *linkedList = ds;
+    return (linkedList->head == NULL) ? "" : linkedList->head->prev->data;
+}
+
 node_list* get_next( void* data_strucutre){
     node_list *head = data_strucutre;
     return head->next;
