@@ -14,26 +14,6 @@
 
 extern int test;
 
-//typedef struct functions Functions;
-
-//typedef struct collection_functions collection_functions;
-
-//extern struct collection_functions *list_functions;
-//extern struct collection_functions *rbt_functions;
-
-
-
-//typedef struct hmap{
-//    int size;
-//    struct node_hmap *arr;
-//}hmap;
-//
-//typedef struct node_hmap{
-//    int size;
-//    void* data_structure;
-//    struct functions* functions;
-//}node_hmap;
-
 typedef struct hmap hmap;
 
 typedef struct node_hmap node_hmap;
@@ -52,7 +32,7 @@ void printTest();
 
 rb_tree* convert_to_rbt(hmap *hmap1, long hash_index);
 
-void* get_data_structure_hmap(hmap *hmap1, int hash_index);
+void* get_data_structure_hmap(hmap *hmap1, long hash_index);
 
 void increment_elements_hmap(hmap *hmap1);
 
