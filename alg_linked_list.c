@@ -213,6 +213,16 @@ char* retrieve_first(void* data_structure){
     node_list *head = data_structure;
 }
 
+void increment_no_elements_list(void* ds){
+    linked_list* list = ds;
+    list->no_elements++;
+}
+
+void decrement_no_elements_list(void* ds){
+    linked_list* list = ds;
+    list->no_elements--;
+}
+
 //char *__get_prev_data(void *ds){
 //    linked_list *list = ds;
 //    printf("prev: %s\n", list->head->prev->data);

@@ -67,4 +67,8 @@ node_rbt* get_node_of_val_rbt(void* ds, char* data);
 
 int get_no_elements_rbt(void* ds);
 
+void increment_no_elements_rbt(void* ds);
+
+void decrement_no_elements_rbt(void* ds);
+
 #endif //CLIONLISTA4_ALG_RBT_H

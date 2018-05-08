@@ -62,6 +62,10 @@ void print_inorder_list(void* ds);
 
 int get_no_elements_list(void* ds);
 
+void increment_no_elements_list(void* ds);
+
+void decrement_no_elements_list(void* ds);
+
 node_list *get_head_list(linked_list *list);
 
 node_list* new_node_list(char *data, node_list *next);

@@ -311,3 +311,13 @@ int get_no_elements_rbt(void* ds){
     rb_tree* tree = ds;
     return tree->no_elements;
 }
+
+void increment_no_elements_rbt(void* ds){
+    rb_tree *tree = ds;
+    tree->no_elements++;
+}
+
+void decrement_no_elements_rbt(void* ds){
+    rb_tree *tree = ds;
+    tree->no_elements--;
+}
