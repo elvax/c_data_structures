@@ -119,7 +119,6 @@ int count_elements_hmap(void* ds){
 
 }
 
-
 void printTest(){
     printf("test = %d\n", test);
 }

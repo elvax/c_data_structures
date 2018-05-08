@@ -22,6 +22,10 @@ node_rbt* new_node_rbt(node_rbt*, char*);
 
 node_rbt* new_leaf_rbt(node_rbt*, char*);
 
+void print_color_sizeof();
+
+void print_node_rb_size();
+void print_rb_tree_size();
 
 int insert_rbt(void *root, char *data);
 

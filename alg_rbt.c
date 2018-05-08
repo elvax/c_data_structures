@@ -19,12 +19,22 @@ enum color{RED, BLACK};
 
 struct node_rbt{
     char* data;
+    enum color color;
+    char a,b,c,d;
     struct node_rbt *left_child,
       *right_child,
       *parent;
-    enum color color;
-} NIL = {"jestem nil", NULL, NULL, NULL, BLACK};
+} NIL = {"jestem nil", BLACK, NULL, NULL, NULL};
 
+void print_color_sizeof(){
+    printf("sizeof enum color %lu\n", sizeof(enum color));
+}
+void print_node_rb_size(){
+    printf("sizeof struct rb_tree %lu\n", sizeof(struct rb_tree));
+}
+void print_rb_tree_size(){
+    printf("sizeof struct node_rb %lu\n", sizeof(struct node_rbt));
+}
 
 rb_tree *new_rb_tree(){
     rb_tree *new = (rb_tree *) malloc(sizeof(rb_tree));
