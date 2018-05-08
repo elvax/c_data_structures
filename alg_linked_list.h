@@ -62,11 +62,11 @@ void print_inorder_list(void* ds);
 
 node_list *get_head_list(linked_list *list);
 
-node_list* new_node_list(char *data, node_list *prev, node_list *next);
+node_list* new_node_list(char *data, node_list *next);
 
 node_list* get_next( void*);
 
-node_list *_insert_list(void *data_structure, char *data);
+node_list *_insert_list(node_list *data_structure, char *data);
 int _find_list(void* head, char* data);
 void* _delete_list(void* head, char* data);
 int _count_elements_list(void*);

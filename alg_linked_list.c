@@ -16,8 +16,7 @@ struct linked_list{
 };
 
 struct node_list{
-    struct node_list *prev,
-            *next;
+    struct node_list *next;
     char *data;
 };
 
@@ -31,9 +30,7 @@ linked_list *new_linked_list(){
 int insert_list(void* ds, char* data){
     linked_list *linkedList = ds;
     if (linkedList->head == NULL){
-        node_list *newHead = new_node_list(data, NULL, NULL);
-        newHead->prev = newHead;
-        linkedList->head = newHead;
+        linkedList->head = new_node_list(data, NULL);
         linkedList->no_elements++;
         return 1;
     } else {
@@ -54,13 +51,11 @@ int find_list(void *ds, char *data) {
 }
 
 char* min_list(void* ds){
-    linked_list *linkedList = ds;
-    return (linkedList->head == NULL) ? "" : linkedList->head->data;
+    return "";
 }
 
 char* max_list(void* ds){
-    linked_list *linkedList = ds;
-    return (linkedList->head == NULL) ? "" : linkedList->head->prev->data;
+    return "";
 }
 
 char* successor_list(void* ds, char* data){
@@ -103,51 +98,47 @@ char* get_data_list( void* data_structure){
     return head->data;
 }
 
-node_list* new_node_list(char *data, node_list *prev, node_list *next){
+node_list* new_node_list(char *data, node_list *next){
     node_list *new = (node_list *) malloc(sizeof(node_list));
     new->data = data;
-    new->prev = prev;
     new->next = next;
-
     return new;
 }
 
-node_list *_insert_list(void* data_structure, char* data){
-    if (data_structure == NULL){
-        printf("ERROR w _insert_list");
-        exit(-1);
-    }
-    node_list *head = data_structure;
+node_list *_insert_list(node_list *head, char* data){
+    node_list *headList = head;
+//    node_list* previous = NULL;
+//    node_list* current=head;
+//    while(current != NULL) {
+//        if (strcmp(data, current->data) < 0) {
+//            if (previous != NULL) {
+//                node_list *newNode = new_node_list(data, previous, current);
+//                previous->next = newNode;
+//                current->prev = newNode;
+//                return head;
+//            } else {
+//                node_list *newNode = new_node_list(data, head->prev, current);
+//                return newNode;
+//            }
+//        } else if (strcmp(data, current->data) == 0) {
+//            node_list *newNode = new_node_list(data, current, current->next);
+//            current->next = newNode;
+//            if (newNode->next == NULL) {
+//                head->prev = newNode;
+//            }
+//            return head;
+//        } else {
+//            previous = current;
+//            current = current->next;
+//        }
+//    }
+//    node_list *newNode = new_node_list(data, previous, NULL);
+//    previous->next = newNode;
+//    head->prev = newNode;
+//    return head;
+    node_list *newNode = new_node_list(data, headList);
+    return newNode;
 
-    node_list* previous = NULL;
-    node_list* current=head;
-    while(current != NULL) {
-        if (strcmp(data, current->data) < 0) {
-            if (previous != NULL) {
-                node_list *newNode = new_node_list(data, previous, current);
-                previous->next = newNode;
-                current->prev = newNode;
-                return head;
-            } else {
-                node_list *newNode = new_node_list(data, head->prev, current);
-                return newNode;
-            }
-        } else if (strcmp(data, current->data) == 0) {
-            node_list *newNode = new_node_list(data, current, current->next);
-            current->next = newNode;
-            if (newNode->next == NULL) {
-                head->prev = newNode;
-            }
-            return head;
-        } else {
-            previous = current;
-            current = current->next;
-        }
-    }
-    node_list *newNode = new_node_list(data, previous, NULL);
-    previous->next = newNode;
-    head->prev = newNode;
-    return head;
 }
 
 int _find_list(void* head, char* data){
@@ -210,7 +201,7 @@ void _print_all_data_list(node_list* data_structure){
 
     node_list* crawler=head;
     while(crawler != NULL) {
-        printf("data: %s\n", get_data_list(crawler));
+        printf("lista: %s\n", get_data_list(crawler));
         crawler = crawler->next;
     }
 }
@@ -219,7 +210,7 @@ char* retrieve_first(void* data_structure){
     node_list *head = data_structure;
 }
 
-char *__get_prev_data(void *ds){
-    linked_list *list = ds;
-    printf("prev: %s\n", list->head->prev->data);
-}
+//char *__get_prev_data(void *ds){
+//    linked_list *list = ds;
+//    printf("prev: %s\n", list->head->prev->data);
+//}
