@@ -208,6 +208,16 @@ char *min_bst(node_bst *root) {
     return _min_node_bst(root)->data;
 }
 
+void increment_no_elements_bst(void* ds){
+    bs_tree* tree = ds;
+    tree->no_elements++;
+}
+
+void decrement_no_elements_bst(void* ds){
+    bs_tree* tree = ds;
+    tree->no_elements--;
+}
+
 //struct funs_bst{
 //    char* str;
 //    void* ptr;

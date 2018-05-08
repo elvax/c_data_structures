@@ -55,6 +55,8 @@ char* min_bst(node_bst *root);
 
 typedef struct funs_bst funs_bst;
 
+void increment_no_elements_bst(void* ds);
 
+void decrement_no_elements_bst(void* ds);
 
 #endif //CLIONLISTA4_ALG_BST_H

@@ -27,6 +27,10 @@ typedef struct functions{
 
     int (*get_no_elements)(void *);
 
+    void (*increment_no_elements)(void *);
+
+    void (*decrement_no_elements)(void *);
+
 }functions;
 
 extern functions functions_list;

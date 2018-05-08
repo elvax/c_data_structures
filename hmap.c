@@ -17,7 +17,6 @@ struct hmap{
 };
 
 struct node_hmap{
-    int size;
     void* data_structure;
     functions *functions;
 };
@@ -28,7 +27,7 @@ void print_alldata_node_hmap(hmap* hmap1, int index){
 }
 
 int get_size_node_hmap(hmap* hmap1, int index){
-    return hmap1->arr[index].size;
+    return hmap1->arr[index].functions->get_no_elements(hmap1->arr[index].data_structure);
 }
 
 hmap *new_hash_map(int size){
@@ -42,7 +41,6 @@ node_hmap* create_hash_table(int size){
     node_hmap* table = (node_hmap *) malloc(sizeof(node_hmap) * size);
 
     for (int i = 0; i < size; i++) {
-        table[i].size = 0;
         table[i].data_structure = NULL;
         table[i].functions = NULL;
     }
@@ -123,8 +121,14 @@ void printTest(){
     printf("test = %d\n", test);
 }
 
-void increment_elements_hmap(hmap *hmap1){
-    hmap1->no_elements++;
+void increment_no_elements_hmap(void *ds){
+    hmap *hashmap = ds;
+    hashmap->no_elements++;
+}
+
+void decrement_no_elements_hmap(void *ds){
+    hmap *hashmap = ds;
+    hashmap->no_elements--;
 }
 
 int get_no_elements_hmap(void *ds){
@@ -166,8 +170,4 @@ char *max_hmap(void *ds){
 
 char* successor_hmap(void* ds, char* data){
     return "";
-}
-
-int get_no_elements_hmap(void* ds){
-
 }

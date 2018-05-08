@@ -34,7 +34,9 @@ rb_tree* convert_to_rbt(hmap *hmap1, long hash_index);
 
 void* get_data_structure_hmap(hmap *hmap1, long hash_index);
 
-void increment_elements_hmap(hmap *hmap1);
+void increment_no_elements_hmap(void *ds);
+
+void decrement_no_elements_hmap(void *ds);
 
 
 int insert_hmap(void* hmap, char* data);
