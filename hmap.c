@@ -67,20 +67,21 @@ int insert_hmap(void* data_structure, char* data){
         hmap->arr[hash_index].data_structure = new_linked_list();
         hmap->arr[hash_index].functions = &functions_list;
         hmap->arr[hash_index].functions->insert(hmap->arr[hash_index].data_structure, data);
-        hmap->arr[hash_index].size++;
+        hmap->arr[hash_index].functions->increment_no_elements(hmap->arr[hash_index].data_structure);
         hmap->no_elements++;
 
-    } else if (hmap->arr[hash_index].size > 2 && hmap->arr[hash_index].functions == &functions_list) {
+    } else if (hmap->arr[hash_index].functions->get_no_elements(hmap->arr[hash_index].data_structure) > 2
+               && hmap->arr[hash_index].functions == &functions_list) {
         hmap->arr[hash_index].data_structure = convert_to_rbt(hmap, hash_index);
 
         hmap->arr[hash_index].functions = &functions_rbt;
         hmap->arr[hash_index].functions->insert(hmap->arr[hash_index].data_structure, data);
-        hmap->arr[hash_index].size++;
+        hmap->arr[hash_index].functions->increment_no_elements(hmap->arr[hash_index].data_structure);
         hmap->no_elements++;
 
     } else {
         hmap->arr[hash_index].functions->insert(hmap->arr[hash_index].data_structure, data);
-        hmap->arr[hash_index].size++;
+        hmap->arr[hash_index].functions->increment_no_elements(hmap->arr[hash_index].data_structure);
         hmap->no_elements++;
     }
     return 1;
@@ -110,7 +111,7 @@ void delete_hmap(struct hmap* hmap, char* data){
     hmap->arr[hash_index].data_structure =
             hmap->arr[hash_index].functions->delete(hmap->arr[hash_index].data_structure, data);
 
-    hmap->arr[hash_index].size = hmap->arr[hash_index].functions->count_elements(hmap->arr[hash_index].data_structure);
+//    hmap->arr[hash_index].size = hmap->arr[hash_index].functions->count_elements(hmap->arr[hash_index].data_structure);
 }
 
 int count_elements_hmap(void* ds){
@@ -141,7 +142,7 @@ int find_hmap(void* hmap1, char* data){
     long hash_index = hash(data);
 
     //size 0 of node in hash table indicates no elements in that node
-    if(hash_map->arr[hash_index].size == 0)
+    if(hash_map->arr[hash_index].functions->get_no_elements(hash_map->arr[hash_index].data_structure) == 0)
         return 0;
     //otherwise find element
     return hash_map->arr[hash_index].functions->find(hash_map->arr[hash_index].data_structure, data);
@@ -152,7 +153,7 @@ void print_all_data_hmap(void* hmap1){
     int size = hash_map->size;
     int i;
     for (i = 0; i < size; i++) {
-        if(hash_map->arr[i].size > 0){
+        if(hash_map->arr[i].functions->get_no_elements(hash_map->arr[i].data_structure) > 0){
             printf("[%d]:\n", i);
             print_alldata_node_hmap(hash_map, i);
         }
