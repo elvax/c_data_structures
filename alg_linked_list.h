@@ -64,13 +64,13 @@ node_list *get_head_list(linked_list *list);
 
 node_list* new_node_list(char *data, node_list *next);
 
-node_list* get_next( void*);
+node_list* get_next( node_list*);
 
 node_list *_insert_list(node_list *data_structure, char *data);
 int _find_list(void* head, char* data);
 void* _delete_list(void* head, char* data);
 int _count_elements_list(void*);
-char* get_data_list( void*);
+char* get_data_list( node_list*);
 void _print_all_data_list(node_list*);
 char* retrieve_first(void* data_structure);
 char *__get_prev_data(void *ds);

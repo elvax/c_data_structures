@@ -88,14 +88,12 @@ node_list *get_head_list(linked_list *list){
     return  list->head;
 }
 
-node_list* get_next( void* data_strucutre){
-    node_list *head = data_strucutre;
-    return head->next;
+node_list* get_next( node_list* node){
+    return node->next;
 }
 
-char* get_data_list( void* data_structure){
-    node_list *head = data_structure;
-    return head->data;
+char* get_data_list( node_list* node){
+    return node->data;
 }
 
 node_list* new_node_list(char *data, node_list *next){
