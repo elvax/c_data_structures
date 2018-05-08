@@ -84,6 +84,11 @@ void print_inorder_list(void* ds){
     }
 }
 
+int get_no_elements_list(void* ds){
+   linked_list* list = ds;
+    return list->no_elements;
+}
+
 node_list *get_head_list(linked_list *list){
     return  list->head;
 }

@@ -306,3 +306,8 @@ node_rbt* get_node_of_val_rbt(void* ds, char* data){
     }
     return current;
 }
+
+int get_no_elements_rbt(void* ds){
+    rb_tree* tree = ds;
+    return tree->no_elements;
+}

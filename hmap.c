@@ -127,8 +127,9 @@ void increment_elements_hmap(hmap *hmap1){
     hmap1->no_elements++;
 }
 
-int get_no_elements_hmap(hmap *hmap1){
-    return hmap1->no_elements;
+int get_no_elements_hmap(void *ds){
+    hmap* hashmap = ds;
+    return hashmap->no_elements;
 }
 
 int find_hmap(void* hmap1, char* data){
@@ -165,4 +166,8 @@ char *max_hmap(void *ds){
 
 char* successor_hmap(void* ds, char* data){
     return "";
+}
+
+int get_no_elements_hmap(void* ds){
+
 }

@@ -12,6 +12,8 @@ typedef struct bs_tree bs_tree;
 
 typedef struct node_bst node_bst;
 
+int get_no_elements_bst(void* ds);
+
 bs_tree *new_bs_tree();
 
 node_bst* new_node_bst(char* data, node_bst* parent);

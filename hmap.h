@@ -42,7 +42,7 @@ void delete_hmap(struct hmap* hmap, char* data);
 //void load_hmap(struct hmap* hmap)
 
 
-int get_no_elements_hmap(hmap *hmap1);
+int get_no_elements_hmap(void *ds);
 
 /**
  * Function searches data structure for given data

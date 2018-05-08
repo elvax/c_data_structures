@@ -23,6 +23,11 @@ struct node_bst{
     struct node_bst *parent;
 };
 
+int get_no_elements_bst(void* ds){
+    bs_tree* tree = ds;
+    return tree->no_elements;
+}
+
 bs_tree *new_bs_tree(){
     bs_tree *new = (bs_tree *) malloc(sizeof(bs_tree));
     new->no_elements = 0;

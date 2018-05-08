@@ -24,6 +24,9 @@ typedef struct functions{
     char* (*max)(void*);
 
     char *(*successor)(void *, char *);
+
+    int (*get_no_elements)(void *);
+
 }functions;
 
 extern functions functions_list;
