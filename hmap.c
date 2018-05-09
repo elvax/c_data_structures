@@ -153,7 +153,7 @@ void print_all_data_hmap(void* hmap1){
     int size = hash_map->size;
     int i;
     for (i = 0; i < size; i++) {
-        if(hash_map->arr[i].functions->get_no_elements(hash_map->arr[i].data_structure) > 0){
+        if(hash_map->arr[i].data_structure != NULL){
             printf("[%d]:\n", i);
             print_alldata_node_hmap(hash_map, i);
         }
