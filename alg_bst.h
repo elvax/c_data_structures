@@ -34,7 +34,7 @@ char* successor_bs_tree(void* ds, char* data);
 
 char* _successor_bs_tree(node_bst* n, char* data);
 
-node_bst* get_node_of_val_bst(void* ds, char* data);
+node_bst* get_node_of_val_bst(node_bst* root, char* data);
 
 void _print_inorder_bst(node_bst *root);
 
@@ -46,7 +46,12 @@ node_bst* _min_node_bst(node_bst *node);
 
 node_bst* _max_node_bst(node_bst *node);
 
-node_bst *delete_bst(node_bst *root, char* data);
+void delete_bst(void *ds, char* data);
+
+void _delete_bst(bs_tree *tree, char* data);
+
+void transplant_bst(bs_tree* tree, node_bst *u, node_bst *v);
+
 
 /*
  * Returns minimum data in this tree

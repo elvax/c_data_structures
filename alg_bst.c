@@ -142,8 +142,8 @@ char* _successor_bs_tree(node_bst* ds, char* data){
 
 }
 
-node_bst* get_node_of_val_bst(void* ds, char* data){
-    node_bst *current = ds;
+node_bst* get_node_of_val_bst(node_bst* root, char* data){
+    node_bst *current = root;
     while (current != NULL) {
         if (strcmp(data, current->data) < 0) {
             current = current->left_child;
@@ -176,30 +176,71 @@ node_bst* _max_node_bst(node_bst *node) {
     return current;
 }
 
-node_bst *delete_bst(node_bst *root, char* data){
-    if(root == NULL)
-        return NULL;
-
-    if (strcmp(data, root->data) < 0) {
-        return root->left_child = delete_bst(root->left_child, data);
-    } else if (strcmp(data, root->data) > 0) {
-        return root->right_child = delete_bst(root->right_child, data);
-    } else {
-        if (root->left_child == NULL) {
-            node_bst *tmp = root->right_child;
-            free(root);
-            return tmp;
-        } else if(root->right_child == NULL){
-            node_bst *tmp = root->left_child;
-            free(root);
-            return tmp;
-        }
-        node_bst *tmp = _min_node_bst(root->right_child);
-        root->data = tmp->data;
-        root->right_child = delete_bst(root->right_child, tmp->data);
+void delete_bst(void *ds, char* data){
+    bs_tree *tree = ds;
+    if (tree == NULL) {
+        printf("error NULL pointer\n");
+        exit(-1);
     }
-    return root;
+
+    if (tree->no_elements > 0
+            && _find_bst(tree->root, data)) {
+        _delete_bst(tree, data);
+    }
 }
+
+void _delete_bst(bs_tree *tree, char* data){
+    node_bst *node_to_delete = get_node_of_val_bst(tree->root, data);
+    if (node_to_delete->left_child == NULL) {
+        // node has not left child
+        transplant_bst(tree, node_to_delete, node_to_delete->right_child);
+    } else if (node_to_delete->right_child == NULL) {
+        // node has not right child
+        transplant_bst(tree, node_to_delete, node_to_delete->left_child);
+    } else {
+        node_bst *min_node = _min_node_bst(node_to_delete->right_child);
+        if (min_node->parent != node_to_delete) {
+            transplant_bst(tree, min_node, min_node->right_child);
+            min_node->right_child = node_to_delete->right_child;
+            min_node->right_child->parent = min_node;
+        }
+        transplant_bst(tree, node_to_delete, min_node);
+        min_node->left_child = node_to_delete->left_child;
+        min_node->left_child->parent = min_node;
+    }
+//    if (strcmp(data, root->data) < 0) {
+//        return root->left_child = delete_bst(root->left_child, data);
+//    } else if (strcmp(data, root->data) > 0) {
+//        return root->right_child = delete_bst(root->right_child, data);
+//    } else {
+//        if (root->left_child == NULL) {
+//            node_bst *tmp = root->right_child;
+//            free(root);
+//            return tmp;
+//        } else if(root->right_child == NULL){
+//            node_bst *tmp = root->left_child;
+//            free(root);
+//            return tmp;
+//        }
+//        node_bst *tmp = _min_node_bst(root->right_child);
+//        root->data = tmp->data;
+//        root->right_child = delete_bst(root->right_child, tmp->data);
+//    }
+//    return root;
+}
+
+void transplant_bst(bs_tree* tree, node_bst *u, node_bst *v){
+    if (u->parent == NULL) {
+        tree->root = v;
+    } else if (u == u->parent->left_child) {
+        u->parent->left_child = v;
+    } else {
+        u->parent->right_child = v;
+    }
+    if (v != NULL)
+        v->parent = u->parent;
+}
+
 
 char *min_bst(node_bst *root) {
     if (root == NULL)
