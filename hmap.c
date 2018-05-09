@@ -21,6 +21,8 @@ struct node_hmap{
     functions *functions;
 };
 
+// todo doadć decrementacje do metod, delete ma zwracac int, decrementacja hmap
+// todo insert sam powinien inkrementowac
 
 void print_alldata_node_hmap(hmap* hmap1, int index){
     hmap1->arr[index].functions->print_all_data(hmap1->arr[index].data_structure);
@@ -67,7 +69,6 @@ int insert_hmap(void* data_structure, char* data){
         hmap->arr[hash_index].data_structure = new_linked_list();
         hmap->arr[hash_index].functions = &functions_list;
         hmap->arr[hash_index].functions->insert(hmap->arr[hash_index].data_structure, data);
-        hmap->arr[hash_index].functions->increment_no_elements(hmap->arr[hash_index].data_structure);
         hmap->no_elements++;
 
     } else if (hmap->arr[hash_index].functions->get_no_elements(hmap->arr[hash_index].data_structure) > 2
@@ -76,12 +77,10 @@ int insert_hmap(void* data_structure, char* data){
 
         hmap->arr[hash_index].functions = &functions_rbt;
         hmap->arr[hash_index].functions->insert(hmap->arr[hash_index].data_structure, data);
-        hmap->arr[hash_index].functions->increment_no_elements(hmap->arr[hash_index].data_structure);
         hmap->no_elements++;
 
     } else {
         hmap->arr[hash_index].functions->insert(hmap->arr[hash_index].data_structure, data);
-        hmap->arr[hash_index].functions->increment_no_elements(hmap->arr[hash_index].data_structure);
         hmap->no_elements++;
     }
     return 1;
@@ -105,13 +104,16 @@ void* get_data_structure_hmap(hmap *hmap1, long hash_index){
     return hmap1->arr[hash_index].data_structure;
 }
 
-void delete_hmap(struct hmap* hmap, char* data){
+void delete_hmap(void *ds, char* data){
+    hmap *hashmap = ds;
+    if (hashmap == NULL){
+        printf("error NULL pointer\n");
+        exit(-1);
+    }
+
     long hash_index = hash(data);
-
-    hmap->arr[hash_index].data_structure =
-            hmap->arr[hash_index].functions->delete(hmap->arr[hash_index].data_structure, data);
-
-//    hmap->arr[hash_index].size = hmap->arr[hash_index].functions->count_elements(hmap->arr[hash_index].data_structure);
+    if (hashmap->arr[hash_index].data_structure != NULL)
+        hashmap->arr[hash_index].functions->delete(hashmap->arr[hash_index].data_structure, data);
 }
 
 int count_elements_hmap(void* ds){
@@ -154,7 +156,7 @@ void print_all_data_hmap(void* hmap1){
     int i;
     for (i = 0; i < size; i++) {
         if(hash_map->arr[i].data_structure != NULL){
-            printf("[%d]:\n", i);
+            printf("[%d,%d]:\n", i, hash_map->arr[i].functions->get_no_elements(hash_map->arr[i].data_structure));
             print_alldata_node_hmap(hash_map, i);
         }
 
