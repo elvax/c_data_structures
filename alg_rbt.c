@@ -20,7 +20,6 @@ enum color{RED, BLACK};
 struct node_rbt{
     char* data;
     enum color color;
-    char a,b,c,d;
     struct node_rbt *left_child,
       *right_child,
       *parent;
@@ -264,7 +263,125 @@ char* _max_rbt(node_rbt *root){
 }
 
 void *delete_rbt(void *data_strucutre, char *data){
+    rb_tree *tree = data_strucutre;
+    if (tree == NULL) {
+        printf("error NULL pointer\n");
+        exit(-1);
+    }
 
+    if (tree->no_elements != 0
+            && _find_rbt(tree->root, data)) {
+        _delete_rbt(tree, data);
+    }
+}
+
+void _delete_rbt(rb_tree *tree, char* data){
+    node_rbt *node_to_delete = get_node_of_val_rbt(tree->root, data);
+    node_rbt *y = node_to_delete;
+    node_rbt *x;
+    enum color y_original_color = y->color;
+    if (node_to_delete->left_child == &NIL) {
+        x = node_to_delete->right_child;
+        transplant_rbt(tree, node_to_delete, node_to_delete->right_child);
+    } else if (node_to_delete->right_child == &NIL) {
+        x = node_to_delete->left_child;
+        transplant_rbt(tree, node_to_delete, node_to_delete->left_child);
+    } else {
+        y = _min_node_rbt(node_to_delete->right_child);
+        y_original_color = y->color;
+        x = y->right_child;
+        if (y->parent == node_to_delete) {
+            x->parent = y;
+        } else {
+            transplant_rbt(tree, y, y->right_child);
+            y->right_child = node_to_delete->right_child;
+            y->right_child->parent = y;
+        }
+        transplant_rbt(tree, node_to_delete, y);
+        y->left_child = node_to_delete->left_child;
+        y->left_child->parent = y;
+        y->color = node_to_delete->color;
+
+    }
+    if (y_original_color == BLACK){
+        _delete_fixup_rbt(tree, x);
+    }
+
+}
+
+void _delete_fixup_rbt(rb_tree *tree, node_rbt *x){
+    node_rbt *w;
+    while (x != &NIL && x->color == BLACK) {
+        if (x == x->parent->left_child) {
+            w = x->parent->right_child;
+            if (w->color == RED) {
+                w->color = BLACK;
+                x->parent->color = RED;
+                rotate_left(tree, x->parent);
+                w = x->parent->right_child;
+            }
+            if (w->left_child->color == BLACK
+                    && w->right_child->color == BLACK) {
+                w->color = RED;
+                x = x->parent;
+            } else if (w->right_child->color == BLACK) {
+                w->left_child->color = BLACK;
+                w->color = RED;
+                rotate_right(tree, w);
+                w = x->parent->right_child;
+            }
+            w->color = x->parent->color;
+            x->parent->color = BLACK;
+            w->right_child->color = BLACK;
+            rotate_left(tree, x->parent);
+            x = tree->root;
+        } else {
+            w = x->parent->left_child;
+            if (w->color == RED) {
+                w->color = BLACK;
+                x->parent->color = RED;
+                rotate_right(tree, x->parent);
+                w = x->parent->left_child;
+            }
+            if (w->right_child->color == BLACK
+                && w->left_child->color == BLACK) {
+                w->color = RED;
+                x = x->parent;
+            } else if (w->left_child->color == BLACK) {
+                w->right_child->color = BLACK;
+                w->color = RED;
+                rotate_left(tree, w);
+                w = x->parent->left_child;
+            }
+            w->color = x->parent->color;
+            x->parent->color = BLACK;
+            w->left_child->color = BLACK;
+            rotate_right(tree, x->parent);
+            x = tree->root;
+        }
+    }
+    x->color = BLACK;
+}
+
+void transplant_rbt(rb_tree *tree, node_rbt* u, node_rbt *v){
+    if (u->parent == &NIL) {
+        tree->root = v;
+    } else if (u == u->parent->left_child) {
+        u->parent->left_child = v;
+    } else {
+        u->parent->right_child = v;
+    }
+    v->parent = u->parent;
+}
+
+node_rbt* _min_node_rbt(node_rbt *node){
+    node_rbt *current = node;
+
+    /* loop down to find the leftmost leaf */
+    while (current->left_child != &NIL)
+        current = current->left_child;
+
+    return current;
 }
 
 int count_elements_rbt(void* data_strucutre){
@@ -293,8 +410,8 @@ char *_successor_rbt( node_rbt *data_strucuture, char *key) {
     return parent->data;
 }
 
-node_rbt* get_node_of_val_rbt(void* ds, char* data){
-    node_rbt *current = ds;
+node_rbt* get_node_of_val_rbt(node_rbt *root, char* data){
+    node_rbt *current = root;
     while (current != &NIL) {
         if (strcmp(data, current->data) < 0) {
             current = current->left_child;
