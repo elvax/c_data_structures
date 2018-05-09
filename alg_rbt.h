@@ -55,7 +55,7 @@ char *max_rb_tree(void *root);
 
 char *_max_rbt(node_rbt *root);
 
-void delete_rbt(void *, char *);
+int delete_rbt(void *, char *);
 
 void _delete_rbt(rb_tree *tree, char* data);
 

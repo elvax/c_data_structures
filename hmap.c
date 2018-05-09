@@ -104,16 +104,20 @@ void* get_data_structure_hmap(hmap *hmap1, long hash_index){
     return hmap1->arr[hash_index].data_structure;
 }
 
-void delete_hmap(void *ds, char* data){
+int delete_hmap(void *ds, char* data){
     hmap *hashmap = ds;
     if (hashmap == NULL){
         printf("error NULL pointer\n");
         exit(-1);
     }
 
+    int status = 0;
     long hash_index = hash(data);
-    if (hashmap->arr[hash_index].data_structure != NULL)
-        hashmap->arr[hash_index].functions->delete(hashmap->arr[hash_index].data_structure, data);
+    if (hashmap->arr[hash_index].data_structure != NULL){
+        status = hashmap->arr[hash_index].functions->delete(hashmap->arr[hash_index].data_structure, data);
+        if (status) hashmap->no_elements--;
+    }
+    return status;
 }
 
 int count_elements_hmap(void* ds){

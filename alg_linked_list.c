@@ -159,7 +159,7 @@ int _find_list(void* head, char* data){
     return 0;
 }
 
-void delete_list(void* ds, char* data){
+int delete_list(void* ds, char* data){
     linked_list* list = ds;
     if (list == NULL){
         printf("error NULL pointer\n");
@@ -168,7 +168,10 @@ void delete_list(void* ds, char* data){
 
     if (list->no_elements != 0 && _find_list(list->head, data)) {
         list->head = _delete_list(list->head, data);
+        list->no_elements--;
+        return 1;
     }
+    return 0;
 }
 
 

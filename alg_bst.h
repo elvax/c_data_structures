@@ -46,7 +46,7 @@ node_bst* _min_node_bst(node_bst *node);
 
 node_bst* _max_node_bst(node_bst *node);
 
-void delete_bst(void *ds, char* data);
+int delete_bst(void *ds, char* data);
 
 void _delete_bst(bs_tree *tree, char* data);
 

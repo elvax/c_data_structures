@@ -176,7 +176,7 @@ node_bst* _max_node_bst(node_bst *node) {
     return current;
 }
 
-void delete_bst(void *ds, char* data){
+int delete_bst(void *ds, char* data){
     bs_tree *tree = ds;
     if (tree == NULL) {
         printf("error NULL pointer\n");
@@ -186,7 +186,10 @@ void delete_bst(void *ds, char* data){
     if (tree->no_elements > 0
             && _find_bst(tree->root, data)) {
         _delete_bst(tree, data);
+        tree->no_elements--;
+        return 1;
     }
+    return 0;
 }
 
 void _delete_bst(bs_tree *tree, char* data){

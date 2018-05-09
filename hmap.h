@@ -41,7 +41,7 @@ void decrement_no_elements_hmap(void *ds);
 
 int insert_hmap(void* hmap, char* data);
 
-void delete_hmap(void *ds, char* data);
+int delete_hmap(void *ds, char* data);
 //void load_hmap(struct hmap* hmap)
 
 

@@ -262,7 +262,7 @@ char* _max_rbt(node_rbt *root){
     return current->data;
 }
 
-void delete_rbt(void *data_strucutre, char *data){
+int delete_rbt(void *data_strucutre, char *data){
     rb_tree *tree = data_strucutre;
     if (tree == NULL) {
         printf("error NULL pointer\n");
@@ -272,7 +272,10 @@ void delete_rbt(void *data_strucutre, char *data){
     if (tree->no_elements != 0
             && _find_rbt(tree->root, data)) {
         _delete_rbt(tree, data);
+        tree->no_elements--;
+        return 1;
     }
+    return 0;
 }
 
 void _delete_rbt(rb_tree *tree, char* data){

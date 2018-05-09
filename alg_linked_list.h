@@ -60,7 +60,7 @@ char* successor_list(void* ds, char* data);
  */
 void print_inorder_list(void* ds);
 
-void delete_list(void* ds, char* data);
+int delete_list(void* ds, char* data);
 
 node_list *_delete_list(node_list *head, char *data);
 
