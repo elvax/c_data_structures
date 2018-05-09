@@ -51,7 +51,7 @@ node_bst* _insert_node_bst(node_bst *head, char *data){
         node_bst *new_node = _insert_node_bst(head->left_child, data);    //returns newly created node
         head->left_child = new_node;
         new_node->parent = head;                                    //sets parent for new node
-    } else if (strcmp(data, head->data) > 0) {
+    } else {
         node_bst *new_node = _insert_node_bst(head->right_child, data);
         head->right_child = new_node;
         new_node->parent = head;
