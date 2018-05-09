@@ -60,6 +60,10 @@ char* successor_list(void* ds, char* data);
  */
 void print_inorder_list(void* ds);
 
+void delete_list(void* ds, char* data);
+
+node_list *_delete_list(node_list *head, char *data);
+
 int get_no_elements_list(void* ds);
 
 void increment_no_elements_list(void* ds);
@@ -71,10 +75,8 @@ node_list *get_head_list(linked_list *list);
 node_list* new_node_list(char *data, node_list *next);
 
 node_list* get_next( node_list*);
-
 node_list *_insert_list(node_list *data_structure, char *data);
 int _find_list(void* head, char* data);
-void* _delete_list(void* head, char* data);
 int _count_elements_list(void*);
 char* get_data_list( node_list*);
 void _print_all_data_list(node_list*);

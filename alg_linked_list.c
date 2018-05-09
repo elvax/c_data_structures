@@ -159,32 +159,40 @@ int _find_list(void* head, char* data){
     return 0;
 }
 
-void *_delete_list(void *head, char *data) {
-
-    if (head == NULL)
-        return NULL;
-
-    // jak nie ma el. "data" w liście to wejdzie w ifa
-    if (!_find_list(head, data)) {
-        return head;
+void delete_list(void* ds, char* data){
+    linked_list* list = ds;
+    if (list == NULL){
+        printf("error NULL pointer\n");
+        exit(-1);
     }
 
+    if (list->no_elements != 0 && _find_list(list->head, data)) {
+        list->head = _delete_list(list->head, data);
+    }
+}
+
+
+
+node_list *_delete_list(node_list *head, char *data){
     node_list *current = head;
+    node_list *new_head = head;
     node_list* prev=NULL;
     while (current != NULL) {
         if (!strcmp(current->data, data)) {
             if (prev == NULL) {
-                head = current->next;
+                new_head = current->next;
+                free(current);
+                break;
             } else {
                 prev->next = current->next;
                 free(current);
+                break;
             }
         }
         prev = current;
         current = current->next;
     }
-    return head;
-
+    return new_head;
 }
 
 int _count_elements_list(void *data_structure) {
