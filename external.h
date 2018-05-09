@@ -15,7 +15,7 @@ typedef struct functions{
 
     int (*find)(void *, char *);
 
-    void *(*delete)(void *, char *);
+    void (*delete)(void *, char *);
 
     int (*count_elements)(void *);
 
